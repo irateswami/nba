@@ -1,3 +1,3 @@
-module github.com/irateswami/nba.git
+module github.com/irateswami/nba
 
 go 1.14
