@@ -1,47 +1,69 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
+	"context"
+	"flag"
 	"log"
+	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
-	msf "github.com/irateswami/nba/mysportsfeeds"
+	"github.com/gorilla/mux"
 )
-
-type secrets struct {
-	Key string `json:"key"`
-}
-
-// Will never be modified, therefore, is global to package
-var secretsStruct secrets
-
-func init() {
-
-	// Open the secrets
-	secrets, err := os.Open("./secrets.json")
-	if err != nil {
-		log.Fatalf("failed to open secrets: %+s\n", err)
-	}
-
-	// Read in the byte string
-	secretsBytes, err := ioutil.ReadAll(secrets)
-	if err != nil {
-		log.Fatalf("failed to read secrets: %+s\n", err)
-	}
-
-	json.Unmarshal(secretsBytes, &secretsStruct)
-
-	err = secrets.Close()
-	if err != nil {
-		log.Fatalf("failed to close secrets: %+s\n", err)
-	}
-
-	fmt.Printf("%+v\n", secretsStruct)
-}
 
 func main() {
 
-	msf.GetDailyGames(secretsStruct.Key)
+	// Grab the port from the command line on startup
+	// Default is 8080
+	var port string
+	flag.StringVar(&port, "port", "8080", "master port")
+	port = ":" + port
+
+	router := mux.NewRouter()
+	//TODO
+	//router.HandleFunc("/weather", METHODNAME).Methods("GET")
+
+	// Server structure to make things a little easier
+	srv := &http.Server{
+		Addr:    port,
+		Handler: router,
+	}
+
+	// Make a channel to kill the server
+	done := make(chan os.Signal, 1)
+	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+
+	// anonymous go function for listening on the server
+	go func() {
+		// listen and serve, if error isn't null and the server isn't closed
+		// do your thing
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("listen: %s\n", err)
+		}
+	}()
+
+	log.Print("server started")
+
+	// Check the done channel if we're actually done
+	<-done
+	log.Print("server stopped")
+
+	// Provide a context in which to time out
+	// 10 second timeout
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+
+	// defer canceling until the program exits
+	defer cancel()
+
+	// check to make sure we shutdown gracefully
+	// if there is an error, this statement returns and exits here
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatalf("server shutdown failed: %+v", err)
+	}
+
+	// else, we shutdown gracefully! yay!
+	log.Printf("server exited gracefully")
+
 }
