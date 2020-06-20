@@ -1,0 +1,22 @@
+1592587930862	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/f_/9vs_31x15hlf0jnwbktgh39w0000gn/T/rust_mozprofileZTxUd0"
+1592587932722	Marionette	INFO	Listening on port 55484
+1592587932827	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://clarium.global.ssl.fastly.net/gpt/a/wrap.js?v2_1, line 14: unreachable code after return statement
+JavaScript warning: https://clarium.global.ssl.fastly.net/gpt/a/wrap.js?v2_1, line 14: unreachable code after return statement
+JavaScript warning: https://clarium.global.ssl.fastly.net/gpt/a/wrap.js?v2_1, line 14: unreachable code after return statement
+JavaScript warning: https://clarium.global.ssl.fastly.net/gpt/a/wrap.js?v2_1, line 14: unreachable code after return statement
+JavaScript warning: https://clarium.global.ssl.fastly.net/gpt/a/wrap.js?v2_1, line 14: unreachable code after return statement
+1592588619347	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/f_/9vs_31x15hlf0jnwbktgh39w0000gn/T/rust_mozprofileVD3Wlf"
+*** You are running in headless mode.
+1592588620812	Marionette	INFO	Listening on port 55901
+1592588620882	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://clarium.global.ssl.fastly.net/gpt/a/wrap.js?v2_1, line 14: unreachable code after return statement
+JavaScript warning: https://clarium.global.ssl.fastly.net/gpt/a/wrap.js?v2_1, line 14: unreachable code after return statement
+JavaScript warning: https://clarium.global.ssl.fastly.net/gpt/a/wrap.js?v2_1, line 14: unreachable code after return statement
+JavaScript warning: https://clarium.global.ssl.fastly.net/gpt/a/wrap.js?v2_1, line 14: unreachable code after return statement
+JavaScript warning: https://clarium.global.ssl.fastly.net/gpt/a/wrap.js?v2_1, line 14: unreachable code after return statement
+1592594817907	Marionette	INFO	Stopped listening on port 55484
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
