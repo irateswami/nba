@@ -14,7 +14,7 @@ type secrets struct {
 	Key string `json:"key"`
 }
 
-// Will never be modified, therefore, is global
+// Will never be modified, therefore, is global to package
 var secretsStruct secrets
 
 func init() {
@@ -43,6 +43,5 @@ func init() {
 
 func main() {
 
-	msf.GetDailyGames("kgekh")
-
+	msf.GetDailyGames(secretsStruct.Key)
 }
