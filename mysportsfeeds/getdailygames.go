@@ -5,7 +5,7 @@ import "fmt"
 import "log"
 import "net/http"
 
-func getDailyGames(password string) {
+func GetDailyGames(password string) {
 	client := &http.Client{}
 
 	req, err := http.NewRequest("GET", "https://api.mysportsfeeds.com/v2.1/pull/mlb/2019-regular/date/20190330/games.json", nil)

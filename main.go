@@ -1,7 +1,10 @@
 package main
 
-func main() {
-	usrnm := ""
+import (
+	msf "github.com/irateswami/nba/mysportsfeeds"
+)
 
-	mysportsfeeds.getDailyGames(usrnm)
+func main() {
+	msf.GetDailyGames("kgekh")
+
 }
