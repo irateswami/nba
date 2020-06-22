@@ -1,11 +1,17 @@
 package mysportsfeeds
 
-import "encoding/json"
-import "fmt"
-import "log"
-import "net/http"
+import (
+	"encoding/json"
+	"log"
+	"net/http"
+)
 
-func GetDailyGames(password string) {
+type Game struct {
+	HomeTeam string
+	AwayTeam string
+}
+
+func getDailyGames(password string) []Game {
 	client := &http.Client{}
 
 	req, err := http.NewRequest("GET", "https://api.mysportsfeeds.com/v2.1/pull/mlb/2019-regular/date/20190330/games.json", nil)
@@ -24,8 +30,15 @@ func GetDailyGames(password string) {
 
 	json.NewDecoder(response.Body).Decode(games)
 
+	var allDailyGames []Game
+
 	for i := range games.Games {
-		fmt.Printf("%d = %+v %+v\n", i, games.Games[i].Schedule.AwayTeam.Abbreviation, games.Games[i].Schedule.HomeTeam.Abbreviation)
+		game := Game{
+			HomeTeam: games.Games[i].Schedule.HomeTeam.Abbreviation,
+			AwayTeam: games.Games[i].Schedule.AwayTeam.Abbreviation,
+		}
+		allDailyGames = append(allDailyGames, game)
 	}
 
+	return allDailyGames
 }
