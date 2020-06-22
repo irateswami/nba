@@ -14,14 +14,14 @@ type Game struct {
 func getDailyGames(password string) []Game {
 	client := &http.Client{}
 
-	req, err := http.NewRequest("GET", "https://api.mysportsfeeds.com/v2.1/pull/mlb/2019-regular/date/20190330/games.json", nil)
+	request, err := http.NewRequest("GET", "https://api.mysportsfeeds.com/v2.1/pull/mlb/2019-regular/date/20190330/games.json", nil)
 	if err != nil {
 		log.Printf("request failed: %v\n", err)
 	}
 
-	req.SetBasicAuth(password, "MYSPORTSFEEDS")
+	request.SetBasicAuth(password, "MYSPORTSFEEDS")
 
-	response, err := client.Do(req)
+	response, err := client.Do(request)
 	if err != nil {
 		log.Printf("response failed: %v\n", err)
 	}
