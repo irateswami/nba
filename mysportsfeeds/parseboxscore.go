@@ -1,30 +1,20 @@
 package mysportsfeeds
 
-func ParseBoxScore(boxScore BoxScore) {
+func ParseBoxScore(boxScore BoxScore) interface{} {
 
-	allPlayers := []
+	var allPlayers []interface{}
 	awayPlayers := boxScore.Stats.Away.Players
 	homePlayers := boxScore.Stats.Away.Players
 
 	for i := range awayPlayers {
-
-		if awayPlayers[i].Player.Position == "P" {
-			pitcher := new(Pitcher)
-			pitcher.Wins = awayPlayers[i].PlayerStats[0].Pitching.Wins
-			pitcher.Saves = awayPlayers[i].PlayerStats[0].Pitching.Saves
-			pitcher.StrikeOuts = awayPlayers[i].PlayerStats[0].Pitching.PitcherStrikeouts
-			pitcher.EarnedRuns = awayPlayers[i].PlayerStats[0].Pitching.EarnedRunsAllowed
-			pitcher.InningsPitched = awayPlayers[i].PlayerStats[0].Pitching.InningsPitched
-
-		}
-
+		newPlayer := awayPlayers[i]
+		allPlayers = append(allPlayers, newPlayer)
 	}
 
 	for i := range homePlayers {
-		if homePlayers[i].Player.Position == "P" {
-
-		}
-
+		newPlayer := homePlayers[i]
+		allPlayers = append(allPlayers, newPlayer)
 	}
 
+	return allPlayers
 }
