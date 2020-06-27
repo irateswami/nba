@@ -1,6 +1,6 @@
 package mysportsfeeds
 
-type completePlayerStats struct {
+type CompletePlayerStats struct {
 	Player struct {
 		ID           int    `json:"id"`
 		FirstName    string `json:"firstName"`

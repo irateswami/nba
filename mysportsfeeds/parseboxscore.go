@@ -2,7 +2,7 @@ package mysportsfeeds
 
 func ParseBoxScore(boxScore BoxScore) {
 
-	allPlayers := []co
+	allPlayers := []
 	awayPlayers := boxScore.Stats.Away.Players
 	homePlayers := boxScore.Stats.Away.Players
 
